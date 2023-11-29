@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guess the Cell Game with Timer</title>
+  <title>угадай ячейку</title>
   <style>
     table {
       border-collapse: collapse;
@@ -17,6 +17,12 @@
       cursor: pointer;
     }
 
+    .guessed {
+      background-color: pink;
+    }
+    .black{
+        background-color: black;
+    }
     #timer {
       font-size: 18px;
       margin-top: 10px;
@@ -26,10 +32,10 @@
 <body>
 
   <h2>Игра угадай ячейку на JavaScript</h2>
-  <p>Компьютер случайным образом запоминает 10 ячеек из этой таблицы. Игроку нужно кликать на клетки пока он не найдет все загаданные компьютером клетки.</p>
+  <p>Компьютер случайным образом запоминает 10 ячеек из этой таблицы. Игроку нужно кликать на клетки, пока он не найдет все загаданные компьютером клетки.</p>
 
   <table id="gameTable"></table>
-  <div id="timer">Времени осталось:<span id="time">10</span> cекунд</div>
+  <div id="timer">Времени осталось: <span id="time">10</span> секунд</div>
 
   <script>
     function createGameTable(rows, cols) {
@@ -40,7 +46,8 @@
 
         for (let j = 0; j < cols; j++) {
           let cell = row.insertCell();
-          cell.onclick = () => checkCell(i, j);
+          cell.id = `${i}-${j}`;
+          cell.onclick = () => checkCell(cell);
         }
       }
     }
@@ -51,24 +58,28 @@
       while (randomCells.size < totalCells) {
         let randomRow = Math.floor(Math.random() * rows);
         let randomCol = Math.floor(Math.random() * cols);
-        randomCells.add(randomRow - randomCol);
+        randomCells.add(`${randomRow}-${randomCol}`);
       }
 
       return randomCells;
     }
 
-    function checkCell(row, col) {
-      let cellId = row - col;
+    function checkCell(cell) {
+      let cellId = cell.id;
       if (randomCells.has(cellId)) {
-        alert('Вы нашли загаданную ячейку!');
+        cell.classList.add(guessed);
         randomCells.delete(cellId);
 
         if (randomCells.size === 0) {
-          alert('Вы нашли все загаданные ячейки');
+          document.getElementById('timer').textContent = 'Вы нашли все загаданные ячейки!';
           clearTimeout(timer);
         }
       } else {
-        alert('Попробуйте снова.');
+        cell.classList.add('wrong');
+        setTimeout(() => {
+            cell.classList.remove('wrong');
+            cell.classList.add('black');
+        });
       }
     }
 
@@ -77,7 +88,7 @@
       document.getElementById('time').textContent = timeLeft;
 
       if (timeLeft === 0) {
-        alert('Время вышло.');
+        document.getElementById('timer').textContent = 'Время вышло. Игра окончена.';
         clearTimeout(timer);
       } else {
         timer = setTimeout(updateTimer, 1000);
@@ -88,8 +99,8 @@
     const rows = 10;
     const cols = 10;
     let randomCells = getRandomCells(totalCells, rows, cols);
-    let timeLeft = 10; 
-    let timer = setTimeout(updateTimer, 1000); 
+    let timeLeft = 10;
+    let timer = setTimeout(updateTimer, 1000);
 
     createGameTable(rows, cols);
   </script>
