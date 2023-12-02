@@ -82,7 +82,6 @@
             let nums = chunk(normalize(arr, firstWeekDay, 6 - lastWeekDay), 7);
             createTable(body, nums);
 
-            // Обновляем информацию о текущем месяце и годе
             info.textContent = getMonthName(month) + ' ' + year + ' г.';
         }
 
