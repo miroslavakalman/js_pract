@@ -65,6 +65,7 @@
         let body = calendar.querySelector('.body');
         let prev = calendar.querySelector('.prev');
         let next = calendar.querySelector('.next');
+        let info = calendar.querySelector('.info');
 
         let date  = new Date();
         let year  = date.getFullYear();
@@ -79,7 +80,10 @@
             let lastWeekDay  = getLastWeekDay(year, month);
             
             let nums = chunk(normalize(arr, firstWeekDay, 6 - lastWeekDay), 7);
-            createTable(body, nums)
+            createTable(body, nums);
+
+            // Обновляем информацию о текущем месяце и годе
+            info.textContent = getMonthName(month) + ' ' + year + ' г.';
         }
 
         function createTable(parent, arr) {
@@ -161,6 +165,33 @@
             }
             
             return result;
+        }
+
+        function getMonthName(month) {
+            const monthNames = [
+                'Январь', 'Февраль', 'Март',
+                'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь',
+                'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+
+            return monthNames[month];
+        }
+
+        function getNextMonth(currentMonth) {
+            return (currentMonth + 1) % 12;
+        }
+
+        function getPrevMonth(currentMonth) {
+            return (currentMonth - 1 + 12) % 12;
+        }
+
+        function getNextYear(currentYear, currentMonth) {
+            return currentMonth === 11 ? currentYear + 1 : currentYear;
+        }
+
+        function getPrevYear(currentYear, currentMonth) {
+            return currentMonth === 0 ? currentYear - 1 : currentYear;
         }
 
         next.addEventListener('click', function() {
