@@ -195,10 +195,18 @@
 
         next.addEventListener('click', function() {
             draw(body, getNextYear(year, month), getNextMonth(month));
-        });
-
-        prev.addEventListener('click', function() {
-            draw(body, getPrevYear(year, month), getPrevMonth(month));
+            prev.addEventListener('click', function() {
+                draw(body, year, month);
+                prev.addEventListener('click', function() {
+                    draw(body, getPrevYear(year, month), getPrevMonth(month));
+                    next.addEventListener('click', function() {
+                        draw(body, year, month);
+                        next.addEventListener('click', function() {
+                            draw(body, getNextYear(year, month), getNextMonth(month));
+                        });
+                    });
+                });
+            });
         });
     </script>
 </body>
