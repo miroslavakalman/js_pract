@@ -194,20 +194,19 @@
         }
 
         next.addEventListener('click', function() {
-            draw(body, getNextYear(year, month), getNextMonth(month));
-            prev.addEventListener('click', function() {
-                draw(body, year, month);
-                prev.addEventListener('click', function() {
-                    draw(body, getPrevYear(year, month), getPrevMonth(month));
-                    next.addEventListener('click', function() {
-                        draw(body, year, month);
-                        next.addEventListener('click', function() {
-                            draw(body, getNextYear(year, month), getNextMonth(month));
-                        });
-                    });
-                });
-            });
-        });
+    const nextMonth = getNextMonth(month);
+    const nextYear = getNextYear(year, month);
+
+    draw(body, nextYear, nextMonth);
+});
+
+prev.addEventListener('click', function() {
+    const prevMonth = getPrevMonth(month);
+    const prevYear = getPrevYear(year, month);
+
+    draw(body, prevYear, prevMonth);
+});
+
     </script>
 </body>
 </html>
