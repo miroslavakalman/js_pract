@@ -221,6 +221,27 @@ prev.addEventListener('click', function() {
     draw(body, year, month);
 });
 
+        next.addEventListener('click', function() {
+    if (month === 11) {
+        year++;
+        month = 0;
+    } else {
+        month++;
+    }
+
+    draw(body, year, month);
+});
+
+prev.addEventListener('click', function() {
+    if (month === 0) {
+        year--;
+        month = 11;
+    } else {
+        month--;
+    }
+
+    draw(body, year, month);
+});
 
     </script>
 </body>
