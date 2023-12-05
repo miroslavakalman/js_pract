@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <title>Календарик</title>
 </head>
 <body>
@@ -31,6 +34,9 @@
     </div>
 
     <style>
+        body{
+            font-family: 'Montserrat', sans-serif;
+        }
         #parent {
             text-align: center;
         }
@@ -39,24 +45,25 @@
         }
         #calendar td, #calendar th {
             padding: 5px 12px;
-            border: 1px solid black;
+            border: 1px solid rgb(211, 158, 158);
             text-align: center;
+            background-color: pink;
         }
 
         #calendar .nav, #calendar .info {
             text-align: center;
         }
         #calendar a {
-            color: blue;
+            color: black;
             font-size: 25px;
             text-decoration: none;
         }
         #calendar a:hover {
-            color: red;
+            color:pink;
         }
 
         #calendar .active {
-            color: red;
+            color: pink;
         }
     </style>
 
