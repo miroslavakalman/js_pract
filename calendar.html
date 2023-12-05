@@ -207,6 +207,21 @@ prev.addEventListener('click', function() {
     draw(body, prevYear, prevMonth);
 });
 
+    next.addEventListener('click', function() {
+    month = getNextMonth(month);
+    if (month === 0) year = getNextYear(year, month);
+
+    draw(body, year, month);
+});
+
+prev.addEventListener('click', function() {
+    month = getPrevMonth(month);
+    if (month === 11) year = getPrevYear(year, month);
+
+    draw(body, year, month);
+});
+
+
     </script>
 </body>
 </html>
